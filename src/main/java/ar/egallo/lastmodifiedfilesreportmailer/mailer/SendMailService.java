@@ -3,7 +3,10 @@ package ar.egallo.lastmodifiedfilesreportmailer.mailer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import javax.mail.internet.MimeMessage;
 
 @Service
 public class SendMailService {
@@ -37,6 +40,21 @@ public class SendMailService {
         // Catch block to handle the exceptions
         catch (Exception e) {
             return "Error while Sending Mail";
+        }
+    }
+
+    public void sendEmailHtml(EmailDetails emailDetails){
+        try {
+            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
+            helper.setText(emailDetails.getMsgBody(), true); // Use this or above line.
+            helper.setTo(emailDetails.getRecipient());
+            helper.setSubject(emailDetails.getSubject());
+            helper.setFrom("nicolas.ard@gmail.com");
+            javaMailSender.send(mimeMessage);
+        }
+        // Catch block to handle the exceptions
+        catch (Exception e) {
         }
     }
 }

@@ -31,6 +31,9 @@ public class LastModifiedFilesReportMailerApplication implements CommandLineRunn
     @Autowired
     private SendMailService sendMailService;
 
+    @Autowired
+    private AppConfiguration appConfiguration;
+
     public static void main(String[] args) {
 		SpringApplication.run(LastModifiedFilesReportMailerApplication.class, args);
 	}
@@ -39,20 +42,19 @@ public class LastModifiedFilesReportMailerApplication implements CommandLineRunn
     public void run(String... args) {
         //Get Modified Files
        CheckFilesService checkFilesService = new CheckFilesService();
-       List<File> findings = checkFilesService.checkFiles("/home/nicard/workspaces"
+       List<File> findings = checkFilesService.checkFiles(appConfiguration.getPathToCheck()
                ,Instant.now().minus(24,ChronoUnit.HOURS)
                ,Instant.now());
         final Context ctx = new Context();
         ctx.setVariable("name", "recipientName");
         ctx.setVariable("subscriptionDate", new Date());
-        ctx.setVariable("hobbies", Arrays.asList("Cinema", "Sports", "Music"));
-        ctx.setVariable("imageResourceName", "imageResourceName"); // so that we can reference it from HTML
+        ctx.setVariable("changedFiles", findings);
         final String htmlContent = this.textTemplateEngine.process("last-edited-files-email-template.html", ctx);
         final EmailDetails emailDetails = new EmailDetails();
-       emailDetails.setRecipient("nicolas.ard@gmail.com");
+       emailDetails.setRecipient(appConfiguration.getEmailTo());
        emailDetails.setSubject("Ultimos archivos modificados.");
        emailDetails.setMsgBody(htmlContent);
-       sendMailService.sendEmail(emailDetails);
+       sendMailService.sendEmailHtml(emailDetails);
        //Create report
          //Send email
         logger.info("Modified fiels found: {}",findings.size());
