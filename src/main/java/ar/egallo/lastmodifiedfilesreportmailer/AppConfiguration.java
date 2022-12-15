@@ -12,10 +12,15 @@ public class AppConfiguration {
 
     final String emailTo;
 
+    final String emailFrom;
+
     @Autowired
-    public AppConfiguration(@Value("${path-to-check}") final String pathToCheck, @Value("${email-to}")  String emailTo) {
+    public AppConfiguration(@Value("${path-to-check}") final String pathToCheck
+            , @Value("${email-to}")  String emailTo
+            , @Value("${email-from}")  String emailFrom) {
         this.pathToCheck = pathToCheck;
         this.emailTo = emailTo;
+        this.emailFrom = emailFrom;
     }
 
     public String getPathToCheck() {
@@ -24,5 +29,9 @@ public class AppConfiguration {
 
     public String getEmailTo() {
         return emailTo;
+    }
+
+    public String getEmailFrom() {
+        return emailFrom;
     }
 }

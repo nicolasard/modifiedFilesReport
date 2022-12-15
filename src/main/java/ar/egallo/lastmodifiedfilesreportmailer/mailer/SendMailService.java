@@ -1,5 +1,8 @@
 package ar.egallo.lastmodifiedfilesreportmailer.mailer;
 
+import ar.egallo.lastmodifiedfilesreportmailer.fileschecker.CheckFilesService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -10,6 +13,8 @@ import javax.mail.internet.MimeMessage;
 
 @Service
 public class SendMailService {
+
+    Logger logger = LoggerFactory.getLogger(SendMailService.class);
 
     private final JavaMailSender javaMailSender;
 
@@ -27,7 +32,7 @@ public class SendMailService {
                     = new SimpleMailMessage();
 
             // Setting up necessary details
-            mailMessage.setFrom("nicolas.ard@gmail.com");
+            mailMessage.setFrom(emailDetails.getSender());
             mailMessage.setTo(emailDetails.getRecipient());
             mailMessage.setText(emailDetails.getMsgBody());
             mailMessage.setSubject(emailDetails.getSubject());
@@ -50,11 +55,12 @@ public class SendMailService {
             helper.setText(emailDetails.getMsgBody(), true); // Use this or above line.
             helper.setTo(emailDetails.getRecipient());
             helper.setSubject(emailDetails.getSubject());
-            helper.setFrom("nicolas.ard@gmail.com");
+            helper.setFrom(emailDetails.getSender());
             javaMailSender.send(mimeMessage);
         }
         // Catch block to handle the exceptions
         catch (Exception e) {
+            logger.error(e.getMessage(),e);
         }
     }
 }

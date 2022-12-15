@@ -51,12 +51,13 @@ public class LastModifiedFilesReportMailerApplication implements CommandLineRunn
         ctx.setVariable("changedFiles", findings);
         final String htmlContent = this.textTemplateEngine.process("last-edited-files-email-template.html", ctx);
         final EmailDetails emailDetails = new EmailDetails();
-       emailDetails.setRecipient(appConfiguration.getEmailTo());
-       emailDetails.setSubject("Ultimos archivos modificados.");
-       emailDetails.setMsgBody(htmlContent);
-       sendMailService.sendEmailHtml(emailDetails);
-       //Create report
-         //Send email
+        emailDetails.setSender(appConfiguration.getEmailFrom());
+        emailDetails.setRecipient(appConfiguration.getEmailTo());
+        emailDetails.setSubject("Ultimos archivos modificados.");
+        emailDetails.setMsgBody(htmlContent);
+        sendMailService.sendEmailHtml(emailDetails);
+        //Create report
+        //Send email
         logger.info("Modified fiels found: {}",findings.size());
     }
 

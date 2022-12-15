@@ -2,6 +2,8 @@ package ar.egallo.lastmodifiedfilesreportmailer.mailer;
 
 public class EmailDetails {
 
+    private String sender;
+
     private String recipient;
 
     private String msgBody;
@@ -40,5 +42,13 @@ public class EmailDetails {
 
     public void setAttachment(String attachment) {
         this.attachment = attachment;
+    }
+
+    public String getSender() {
+        return sender;
+    }
+
+    public void setSender(String sender) {
+        this.sender = sender;
     }
 }
