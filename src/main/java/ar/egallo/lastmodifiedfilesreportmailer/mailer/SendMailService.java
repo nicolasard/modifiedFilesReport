@@ -33,7 +33,7 @@ public class SendMailService {
 
             // Setting up necessary details
             mailMessage.setFrom(emailDetails.getSender());
-            mailMessage.setTo(emailDetails.getRecipient());
+            mailMessage.setTo(emailDetails.getRecipient().split(";"));
             mailMessage.setText(emailDetails.getMsgBody());
             mailMessage.setSubject(emailDetails.getSubject());
 
@@ -53,7 +53,7 @@ public class SendMailService {
             MimeMessage mimeMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
             helper.setText(emailDetails.getMsgBody(), true); // Use this or above line.
-            helper.setTo(emailDetails.getRecipient());
+            helper.setTo(emailDetails.getRecipient().split(";"));
             helper.setSubject(emailDetails.getSubject());
             helper.setFrom(emailDetails.getSender());
             javaMailSender.send(mimeMessage);
