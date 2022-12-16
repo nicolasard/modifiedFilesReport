@@ -14,13 +14,17 @@ public class AppConfiguration {
 
     final String emailFrom;
 
+    final String serviceUrl;
+
     @Autowired
     public AppConfiguration(@Value("${path-to-check}") final String pathToCheck
             , @Value("${email-to}")  String emailTo
-            , @Value("${email-from}")  String emailFrom) {
+            , @Value("${email-from}")  String emailFrom
+            , @Value("${prometheus-url}") String serviceUrl) {
         this.pathToCheck = pathToCheck;
         this.emailTo = emailTo;
         this.emailFrom = emailFrom;
+        this.serviceUrl = serviceUrl;
     }
 
     public String getPathToCheck() {
@@ -33,5 +37,9 @@ public class AppConfiguration {
 
     public String getEmailFrom() {
         return emailFrom;
+    }
+
+    public String getServiceUrl() {
+        return serviceUrl;
     }
 }
