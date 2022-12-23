@@ -8,6 +8,10 @@ import java.util.List;
 
 import ar.egallo.lastmodifiedfilesreportmailer.mailer.EmailDetails;
 import ar.egallo.lastmodifiedfilesreportmailer.mailer.SendMailService;
+import ar.egallo.lastmodifiedfilesreportmailer.influxdb.InfluxDBService;
+import ar.egallo.lastmodifiedfilesreportmailer.influxdb.model.Field;
+import ar.egallo.lastmodifiedfilesreportmailer.influxdb.model.Measurement;
+import ar.egallo.lastmodifiedfilesreportmailer.influxdb.model.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +33,9 @@ public class LastModifiedFilesReportMailerApplication implements CommandLineRunn
 
     @Autowired
     private SendMailService sendMailService;
+
+    @Autowired
+    private InfluxDBService influxDBService;
 
     @Autowired
     private AppConfiguration appConfiguration;
@@ -56,6 +63,13 @@ public class LastModifiedFilesReportMailerApplication implements CommandLineRunn
         emailDetails.setMsgBody(htmlContent);
         sendMailService.sendEmailHtml(emailDetails);
         //Create report
+        if (appConfiguration.influxEnabled == Boolean.TRUE){
+            Measurement measurement = new Measurement();
+            measurement.setName(appConfiguration.getLoggingMetric());
+            measurement.setTag(List.of(new Tag("file-type","na")));
+            measurement.setField(List.of(new Field("changed-files",String.valueOf(findings.size()))));
+            influxDBService.pushValues(measurement);
+        }
         //Send email
         logger.info("Modified fiels found: {}",findings.size());
     }

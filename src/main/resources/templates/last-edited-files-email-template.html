@@ -19,8 +19,7 @@
     <li th:each="file : ${changedFiles}" th:text="${file.Path}">File Path</li>
 </ul>
 <p>Para acceder al disco Z:/ desde su pc siga los pasos descriptos en <a th:href="@{http://www.egallo.com.ar/docs/#/shared/}">http://www.egallo.com.ar/docs/#/shared/</a></p>
-
-<p>Total de archivos modificados: ####</p>
+<p>Total de archivos modificados: <b><td th:text="${#lists.size(changedFiles)}">##</td></b></p>
 <p>
     Saludos,<br/>
     <em>Servus Solutions</em>
