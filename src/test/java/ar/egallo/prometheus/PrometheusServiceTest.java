@@ -6,16 +6,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-
 @SpringBootTest(classes = LastModifiedFilesReportMailerApplication.class)
 public class PrometheusServiceTest {
 
-    @Autowired
-    InfluxDBService influxDBService;
+    @Autowired InfluxDBService influxDBService;
 
     @Test
     void contextLoads() {
 
-        //this.prometheusService.pushValues(streamsObject);
+        // this.prometheusService.pushValues(streamsObject);
     }
 }

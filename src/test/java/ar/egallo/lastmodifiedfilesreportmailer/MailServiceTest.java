@@ -1,6 +1,5 @@
 package ar.egallo.lastmodifiedfilesreportmailer;
 
-
 import ar.egallo.lastmodifiedfilesreportmailer.mailer.EmailDetails;
 import ar.egallo.lastmodifiedfilesreportmailer.mailer.SendMailService;
 import org.junit.jupiter.api.Test;
@@ -10,8 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 public class MailServiceTest {
 
-    @Autowired
-    SendMailService sendMailService;
+    @Autowired SendMailService sendMailService;
 
     @Test
     void contextLoads() {
