@@ -2,7 +2,9 @@ package ar.nic.influxdb;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 
+@Configuration
 public class InfluxDBConfig {
     final String serviceUrl;
 
