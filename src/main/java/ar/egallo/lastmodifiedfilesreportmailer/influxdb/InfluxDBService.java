@@ -1,9 +1,6 @@
 package ar.egallo.lastmodifiedfilesreportmailer.influxdb;
 
 import ar.egallo.lastmodifiedfilesreportmailer.AppConfiguration;
-import ar.egallo.lastmodifiedfilesreportmailer.influxdb.model.Field;
-import ar.egallo.lastmodifiedfilesreportmailer.influxdb.model.Measurement;
-import ar.egallo.lastmodifiedfilesreportmailer.influxdb.model.Tag;
 import ar.egallo.lastmodifiedfilesreportmailer.mailer.SendMailService;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -12,6 +9,10 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+
+import ar.nic.influxdb.model.Field;
+import ar.nic.influxdb.model.Measurement;
+import ar.nic.influxdb.model.Tag;
 import lombok.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
