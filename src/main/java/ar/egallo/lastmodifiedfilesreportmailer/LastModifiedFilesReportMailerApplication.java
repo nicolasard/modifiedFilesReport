@@ -1,18 +1,17 @@
 package ar.egallo.lastmodifiedfilesreportmailer;
 
 import ar.egallo.lastmodifiedfilesreportmailer.fileschecker.CheckFilesService;
-import ar.egallo.lastmodifiedfilesreportmailer.influxdb.InfluxDBService;
 import ar.egallo.lastmodifiedfilesreportmailer.mailer.EmailDetails;
 import ar.egallo.lastmodifiedfilesreportmailer.mailer.SendMailService;
+import ar.nic.influxdb.InfluxDBService;
+import ar.nic.influxdb.model.Field;
+import ar.nic.influxdb.model.Measurement;
+import ar.nic.influxdb.model.Tag;
 import java.io.File;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
-
-import ar.nic.influxdb.model.Field;
-import ar.nic.influxdb.model.Measurement;
-import ar.nic.influxdb.model.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
