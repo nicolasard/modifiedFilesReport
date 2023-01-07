@@ -23,7 +23,7 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 
 @SpringBootApplication
-@ComponentScan({"ar.nic.influxdb","ar.egallo.lastmodifiedfilesreportmailer"})
+@ComponentScan({"ar.nic.influxdb", "ar.egallo.lastmodifiedfilesreportmailer"})
 public class LastModifiedFilesReportMailerApplication implements CommandLineRunner {
 
     Logger logger = LoggerFactory.getLogger(LastModifiedFilesReportMailerApplication.class);

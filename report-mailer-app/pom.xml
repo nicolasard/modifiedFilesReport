@@ -7,6 +7,11 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>report-mailer-app</name>
     <description>App that creates a report about the last modified files</description>
+    <parent>
+        <groupId>ar.egallo</groupId>
+        <artifactId>last-modified-files-report-mailer</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
     <properties>
         <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
