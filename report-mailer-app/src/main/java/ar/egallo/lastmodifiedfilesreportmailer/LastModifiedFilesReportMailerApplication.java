@@ -26,11 +26,11 @@ public class LastModifiedFilesReportMailerApplication implements CommandLineRunn
 
     Logger logger = LoggerFactory.getLogger(LastModifiedFilesReportMailerApplication.class);
 
+    @Autowired private InfluxDBService influxDBService;
+
     @Autowired private TemplateEngine textTemplateEngine;
 
     @Autowired private SendMailService sendMailService;
-
-    @Autowired private InfluxDBService influxDBService;
 
     @Autowired private AppConfiguration appConfiguration;
 
