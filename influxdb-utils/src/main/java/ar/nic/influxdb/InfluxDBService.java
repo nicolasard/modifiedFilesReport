@@ -5,6 +5,7 @@ import ar.nic.influxdb.model.Field;
 import ar.nic.influxdb.model.Measurement;
 import ar.nic.influxdb.model.Tag;
 import lombok.NonNull;
+import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +47,9 @@ public class InfluxDBService {
         } catch (IOException e) {
             throw new InfluxDBException(e);
         }
-        final BasicAuthenticator basicAuthenticator = new BasicAuthenticator(influxDBConfig.getUser(),influxDBConfig.getPassword());
-        con.setAuthenticator(basicAuthenticator);
+        byte[] authEncBytes = Base64.encodeBase64(new String(influxDBConfig.getUser() +":" + influxDBConfig.getPassword()).getBytes());
+        String authStringEnc = new String(authEncBytes);
+        con.setRequestProperty("Authorization", "Basic " + authStringEnc);
         try {
             con.setRequestMethod("POST");
         } catch (ProtocolException e) {

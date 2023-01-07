@@ -22,7 +22,7 @@
 		<maven.compiler.source>${java.version}</maven.compiler.source>
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 	</properties>
-	<build>
+    <build>
 		<plugins>
 			<plugin>
 				<groupId>com.diffplug.spotless</groupId>
